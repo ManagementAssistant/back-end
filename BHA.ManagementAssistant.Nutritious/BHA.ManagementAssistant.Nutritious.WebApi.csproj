@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Common\BHA.ManagementAssistant.Nutritious.Common.csproj" />
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Model\BHA.ManagementAssistant.Nutritious.Model.csproj" />
   </ItemGroup>
 

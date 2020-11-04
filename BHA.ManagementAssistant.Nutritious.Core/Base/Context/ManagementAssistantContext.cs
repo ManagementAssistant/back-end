@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BHA.ManagementAssistant.Nutritious.Model.Context
+namespace BHA.ManagementAssistant.Nutritious.Core.Base.Entity
 {
     public class ManagementAssistantContext : DbContext
     {

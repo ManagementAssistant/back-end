@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller
@@ -13,7 +11,15 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller
     {
         public ManagementAssistantApiController()
         {
+            ValidateToken();
+        }
 
+        protected virtual void ValidateToken()
+        {
+            System.Threading.Thread.CurrentPrincipal = new ClaimsPrincipal();
+            var x = ControllerContext;
+            //System.Threading.Thread.CurrentPrincipal = HttpContext.User.CreateClaimsPrincipal();
+            System.Threading.Thread.CurrentPrincipal = User.CreateClaimsPrincipal();
         }
     }
 }

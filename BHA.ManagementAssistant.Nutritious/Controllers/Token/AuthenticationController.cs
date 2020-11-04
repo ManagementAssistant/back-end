@@ -5,7 +5,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Baseless.AuthenticationOperation;
+using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +18,10 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 {
     [Route("api/token")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : IndependentController
     {
         [HttpPost("new")]
-        public AuthenticationViewModel GetToken([FromBody]AuthenticationFilterModel authenticationFilterModel)
+        public AuthenticationViewModel GetToken([FromBody] AuthenticationFilterModel authenticationFilterModel)
         {
             AuthenticationViewModel authenticationViewModel = new AuthenticationViewModel();
             if (isValidUserAndPassword(authenticationFilterModel))
@@ -33,8 +35,8 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
         private AuthenticationViewModel GenerateToken(AuthenticationFilterModel authenticationFilterModel)
         {
             Claim[] claims = new Claim[]{
-                new Claim("id","23"),
-                new Claim("organizationID","46")
+                new Claim(MAClaims.ID,"23"),
+                new Claim(MAClaims.OrganizationID,"46")
             };
 
             DateTime expire = DateTime.Now.AddHours(18);

@@ -1,5 +1,4 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
-using BHA.ManagementAssistant.Nutritious.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,7 +21,7 @@ namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
 
         public int Count()
         {
-            throw new NotImplementedException();
+            return _dbSet.Count();
         }
 
         public bool Create(T Entity)
@@ -61,6 +60,11 @@ namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
         }
 
         public bool Update(T Entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<T> ForJoin(bool? isDeleted = false)
         {
             throw new NotImplementedException();
         }

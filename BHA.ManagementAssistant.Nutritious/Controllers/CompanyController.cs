@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Mvc;
+using BHA.ManagementAssistant.Nutritious.Common.Extension;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
 {
@@ -11,14 +12,10 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
     public class CompanyController : ManagementAssistantApiController
     {
         [HttpGet("list")]
-        public List<Object> Get()
+        public Object Get()
         {
-            List<object> list = new List<object>();
-            foreach (var claim in HttpContext.User.Claims)
-            {
-                list.Add(claim);
-            }
-            return list;
+            //return HttpContext.User.GetUserID();
+            return System.Threading.Thread.CurrentPrincipal.GetUserID();
         }
     }
 }
