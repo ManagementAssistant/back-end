@@ -21,6 +21,7 @@ namespace BHA.ManagementAssistant.Nutritious
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
                 });
     }
 }

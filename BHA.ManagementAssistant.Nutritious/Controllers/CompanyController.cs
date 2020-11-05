@@ -8,6 +8,7 @@ using BHA.ManagementAssistant.Nutritious.Common.Extension;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
 {
+    [ApiController]
     [Route("company")]
     public class CompanyController : ManagementAssistantApiController
     {
