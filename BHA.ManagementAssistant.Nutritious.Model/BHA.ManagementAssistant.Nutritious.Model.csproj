@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Common\BHA.ManagementAssistant.Nutritious.Common.csproj" />
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Core\BHA.ManagementAssistant.Nutritious.Core.csproj" />
   </ItemGroup>
 

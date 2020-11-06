@@ -9,5 +9,7 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Interface
 {
     public interface IUserRepository: IRepositoryBase<User>
     {
+        int GetCurrentUserID();
+        string GetCurrentUserName();
     }
 }

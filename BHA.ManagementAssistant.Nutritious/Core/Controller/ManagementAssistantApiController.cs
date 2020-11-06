@@ -10,18 +10,5 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller
     public abstract class ManagementAssistantApiController : ControllerBase
     {
         
-        
-        ////public ManagementAssistantApiController()
-        ////{
-        ////    ValidateToken();
-        ////}
-
-        //protected virtual void ValidateToken()
-        //{
-        //    System.Threading.Thread.CurrentPrincipal = new ClaimsPrincipal();
-        //    var x = ControllerContext;
-        //    //System.Threading.Thread.CurrentPrincipal = HttpContext.User.CreateClaimsPrincipal();
-        //    System.Threading.Thread.CurrentPrincipal = User.CreateClaimsPrincipal();
-        //}
     }
 }

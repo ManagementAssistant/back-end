@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
+using BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete;
 
 namespace BHA.ManagementAssistant.Nutritious
 {
@@ -53,7 +55,9 @@ namespace BHA.ManagementAssistant.Nutritious
 
             });
 
-            
+            services.AddScoped<IUserRepository, UserRepository>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
