@@ -1,4 +1,5 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
+namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : class, IEntity
+    public partial class RepositoryBase<T> : IRepositoryBase<T> where T : class, IEntity
     {
         protected internal ManagementAssistantContext _context { get; set; }
         private DbSet<T> _dbSet;

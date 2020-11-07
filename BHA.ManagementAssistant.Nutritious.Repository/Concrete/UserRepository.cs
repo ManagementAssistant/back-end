@@ -4,6 +4,7 @@ using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using System;
+using BHA.ManagementAssistant.Nutritious.Repository.Base;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete
 {
