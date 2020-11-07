@@ -8,8 +8,8 @@ using System.Text;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
-    public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
+    public class OrganizationRepository : RepositoryBase<Organization>, IOrganizationRepository
     {
-        public CompanyRepository(ManagementAssistantContext context) : base(context) { }
+        public OrganizationRepository(ManagementAssistantContext context) : base(context) { }
     }
 }

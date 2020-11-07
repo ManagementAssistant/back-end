@@ -2,5 +2,6 @@
 {
     public interface IOrganizationBasedEntity : IEntity
     {
+        int OrganizationID { get; set; }
     }
 }

@@ -65,6 +65,7 @@ namespace BHA.ManagementAssistant.Nutritious
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICompanyService, CompanyService>();

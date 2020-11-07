@@ -17,7 +17,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         public RepositoryBase(ManagementAssistantContext context)
         {
             _context = context;
-            _dbSet = _context.Set<T>();
+            _dbSet = _context.Set<T>();            
         }
 
         public bool Create(T Entity)

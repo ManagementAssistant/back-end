@@ -15,6 +15,17 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
 
         public DbSet<User> User { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<Organization> Organization { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne<Organization>(h => h.Organization)
+                .WithMany(w => w.User)
+                .HasForeignKey(fk => fk.OrganizationID);
+
+            base.OnModelCreating(modelBuilder);
+        }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlite(Connection.LocalConnectionString);
