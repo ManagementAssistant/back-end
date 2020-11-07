@@ -20,11 +20,6 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
             _dbSet = _context.Set<T>();
         }
 
-        public int Count()
-        {
-            return _dbSet.Count();
-        }
-
         public bool Create(T Entity)
         {
             throw new NotImplementedException();
@@ -37,7 +32,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         public IQueryable<T> GetAll(bool? isDeleted = false)
         {
-            return _dbSet.AsQueryable();
+            return GetQuery(false, true);
         }
 
         public T GetByID(int id)

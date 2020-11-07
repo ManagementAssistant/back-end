@@ -1,6 +1,7 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Context
@@ -13,6 +14,7 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<Company> Company { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlite(Connection.LocalConnectionString);

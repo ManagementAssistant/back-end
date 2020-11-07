@@ -1,8 +1,10 @@
-﻿using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
+﻿using BHA.ManagementAssistant.Nutritious.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
 {
@@ -11,15 +13,17 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
     public class CompanyController : ManagementAssistantApiController
     {
         private IUserService _userService;
-        public CompanyController(IUserService userService)
+        private ICompanyService _companyService;
+        public CompanyController(IUserService userService, ICompanyService companyService)
         {
             _userService = userService;
+            _companyService = companyService;
         }
 
         [HttpGet("list")]
         public Object Get()
         {
-            return _userService.GetUsers();
+            return _companyService.GetCompanies();
         }
     }
 }

@@ -5,6 +5,7 @@ using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using System;
 using BHA.ManagementAssistant.Nutritious.Repository.Base;
+using BHA.ManagementAssistant.Nutritious.Common.Exceptions;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete
 {
@@ -23,7 +24,7 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete
 
                     if (_user == null)
                     {
-                        throw new Exception("user.id.invalid");
+                        throw new TechnicalException("user.id.invalid");
                     }
                 }
 
