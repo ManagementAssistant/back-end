@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BHA.ManagementAssistant.Nutritious.Model.Model.Baseless.AuthenticationOperation
+﻿namespace BHA.ManagementAssistant.Nutritious.Model.Model.Baseless.AuthenticationOperation
 {
     public class AuthenticationFilterModel
     {

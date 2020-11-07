@@ -9,9 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Core\BHA.ManagementAssistant.Nutritious.Core.csproj" />
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Model\BHA.ManagementAssistant.Nutritious.Model.csproj" />
-    <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Repository\BHA.ManagementAssistant.Nutritious.Repository.csproj" />
   </ItemGroup>
 
 </Project>

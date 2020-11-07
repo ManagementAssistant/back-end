@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using BHA.ManagementAssistant.Nutritious.Common.Constant;
+﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Baseless.AuthenticationOperation;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 {

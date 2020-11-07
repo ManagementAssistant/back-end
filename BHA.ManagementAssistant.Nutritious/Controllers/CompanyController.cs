@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
+using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Mvc;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
-using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
+using System;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
 {
@@ -13,15 +10,16 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
     [Route("company")]
     public class CompanyController : ManagementAssistantApiController
     {
-        IUserRepository _repo;
-        public CompanyController(IUserRepository repo)
+        private IUserService _userService;
+        public CompanyController(IUserService userService)
         {
-            _repo = repo;
+            _userService = userService;
         }
+
         [HttpGet("list")]
         public Object Get()
         {
-            return _repo.GetCurrentUserID();
+            return _userService.GetUsers();
         }
     }
 }

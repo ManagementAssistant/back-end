@@ -5,14 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Common\BHA.ManagementAssistant.Nutritious.Common.csproj" />
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Model\BHA.ManagementAssistant.Nutritious.Model.csproj" />
+    <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Service\BHA.ManagementAssistant.Nutritious.Service.csproj" />
   </ItemGroup>
 
 

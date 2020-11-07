@@ -1,5 +1,5 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
-using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+﻿using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+using BHA.ManagementAssistant.Nutritious.Model.Context;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;

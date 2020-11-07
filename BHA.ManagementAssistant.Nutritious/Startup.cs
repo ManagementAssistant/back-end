@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
+using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Model.Context;
+using BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete;
+using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
+using BHA.ManagementAssistant.Nutritious.Service.Concrete;
+using BHA.ManagementAssistant.Nutritious.Service.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
-using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
-using BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete;
 
 namespace BHA.ManagementAssistant.Nutritious
 {
@@ -25,9 +30,9 @@ namespace BHA.ManagementAssistant.Nutritious
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); //Tokenı Serialize edilemediği için reference loop hatasını engelliyor asp.net core 3.0 dan sonra json değişikliğiyle ilgili 
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); //Tokenı Serialize edilemediği için reference loop hatasını engelliyor asp.net core 3.0 dan sonra json değişikliğiyle ilgili             
 
-            string cnnStr = @"Data Source=DESKTOP-IA00J0R\SQLEXPRESS;Initial Catalog=ManagementAssistant;Trusted_Connection=true;";
+            services.AddDbContext<ManagementAssistantContext>(options => options.UseSqlite(Connection.LocalConnectionString));
 
             services.AddCors(c =>
             {
@@ -54,9 +59,11 @@ namespace BHA.ManagementAssistant.Nutritious
 
 
             });
+            
 
             services.AddScoped<IUserRepository, UserRepository>();
 
+            services.AddScoped<IUserService, UserService>();
 
         }
 
