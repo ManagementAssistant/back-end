@@ -32,7 +32,7 @@ namespace BHA.ManagementAssistant.Nutritious
         {
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); //Tokenı Serialize edilemediği için reference loop hatasını engelliyor asp.net core 3.0 dan sonra json değişikliğiyle ilgili             
 
-            services.AddDbContext<ManagementAssistantContext>(options => options.UseSqlite(Connection.LocalConnectionString));
+            services.AddDbContext<ManagementAssistantContext>(options => options.UseSqlServer(Connection.LocalConnectionString, migrations => migrations.MigrationsAssembly(Connection.DefaultMigrationLayer)));
 
             services.AddCors(c =>
             {

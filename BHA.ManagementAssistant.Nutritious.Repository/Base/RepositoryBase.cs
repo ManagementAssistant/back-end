@@ -36,7 +36,7 @@ namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
 
         public IQueryable<T> GetAll(bool? isDeleted = false)
         {
-            throw new NotImplementedException();
+            return _dbSet.AsQueryable();
         }
 
         public T GetByID(int id)
