@@ -3,7 +3,7 @@ using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Entity
 {
-    public class User : IEntity, IOrganizationBasedEntity
+    public class User : IEntity, IOrganizationBasedEntity, IHierarchyBasedEntity
     {
         public int ID { get; set; }
         public string Name { get; set; }

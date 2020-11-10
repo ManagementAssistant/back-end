@@ -2,5 +2,6 @@
 {
     public interface IHierarchyBasedEntity : IEntity
     {
+        int HierarchyTypeEnum { get; set; }
     }
 }

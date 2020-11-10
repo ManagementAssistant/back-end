@@ -6,10 +6,11 @@ using System.Text;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Model.Entity
 {
-    public class Organization: IEntity, IDeletableEntity, IPersonalityEntity
+    public class Organization: IEntity, IDeletableEntity, ISpecificEntity
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public bool isHierarchical { get; set; }
         public int CreatedByUserID { get; set; }
         public int? UpdatedByUserID { get; set; }
         public DateTime CreateDate { get; set; }

@@ -12,5 +12,6 @@ namespace BHA.ManagementAssistant.Nutritious.Common.Constant
         public const string HierarchyBasedEntity = "IHierarchyBasedEntity";
         public const string OrganizationBasedEntity = "IOrganizationBasedEntity";
         public const string PersonalityEntity = "IPersonalityEntity";
+        public const string SpecificEntity = "ISpecificEntity";
     }
 }

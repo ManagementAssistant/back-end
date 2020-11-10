@@ -6,5 +6,7 @@ using System.Text;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Interface
 {
-    public interface IOrganizationRepository : IRepositoryBase<Organization> { }
+    public interface IOrganizationRepository : IRepositoryBase<Organization>
+    {
+    }
 }

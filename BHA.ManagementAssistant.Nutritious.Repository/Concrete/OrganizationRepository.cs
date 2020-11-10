@@ -10,6 +10,9 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
     public class OrganizationRepository : RepositoryBase<Organization>, IOrganizationRepository
     {
-        public OrganizationRepository(ManagementAssistantContext context) : base(context) { }
+        public OrganizationRepository(ManagementAssistantContext context) : base(context)
+        {
+
+        }
     }
 }

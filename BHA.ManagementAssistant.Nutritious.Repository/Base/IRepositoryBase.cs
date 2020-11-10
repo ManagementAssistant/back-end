@@ -15,6 +15,6 @@ namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
         IQueryable<T> GetAll(bool? isDeleted = false);
         IQueryable<T> ForJoin(bool? isDeleted = false);
         bool AddRange(IEnumerable<T> entities);
-        bool RemoveRange(IEnumerable<T> entities);
+        //bool RemoveRange(IEnumerable<T> entities);
     }
 }
