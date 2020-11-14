@@ -50,14 +50,14 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
                 ApplyDeletedFilters(ref query, isDeleted);
             }
 
-            if (typeof(T).Is(EntityType.CommonEntity) == false)
-            {
-                return ApplyFilterForUser(query);
-            }
-
             if (typeof(T).Is(EntityType.OrganizationBasedEntity))
             {
                 ApplyOrganizationFilters(ref query);
+            }
+
+            if (typeof(T).Is(EntityType.CommonEntity) == false)
+            {
+                ApplyFilterForUser(query);
             }
 
             return query;
