@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
 {
-    public interface IRepositoryBase<T> where T : class, IEntity
+    public interface IRepository<T> where T : class, IEntity
     {
         T GetByID(int id);
         Task<T> GetByIDAsync(int id);
@@ -15,6 +15,7 @@ namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
         IQueryable<T> GetAll(bool? isDeleted = false);
         IQueryable<T> ForJoin(bool? isDeleted = false);
         bool AddRange(IEnumerable<T> entities);
+        IQueryable<T> Test();
         //bool RemoveRange(IEnumerable<T> entities);
     }
 }

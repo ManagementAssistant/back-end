@@ -13,4 +13,8 @@
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Core\BHA.ManagementAssistant.Nutritious.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MiddleWare\" />
+  </ItemGroup>
+
 </Project>

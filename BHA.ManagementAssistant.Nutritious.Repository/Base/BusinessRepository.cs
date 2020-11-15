@@ -1,15 +1,14 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
-using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
-using System.Linq;
+using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
-using Microsoft.Extensions.DependencyInjection;
-using BHA.ManagementAssistant.Nutritious.Model.Enums;
 using System;
+using System.Linq;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 {
-    partial class RepositoryBase<T>
+    partial class MARepository<T>
     {
         private IQueryable<T> GetQuery(IQueryable<T> query, bool forJoin, bool isDeleted)
         {
@@ -65,7 +64,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         private void ApplyOrganizationFilters(ref IQueryable<T> query)
         {
-            Organization organization = _repositoryOrganization.GetAll().First();
+            Organization organization = null;
 
             if (typeof(T).Is(EntityType.HierarchyBasedEntity))
             {
@@ -98,7 +97,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         private void ApplyOrganizationBasedEntity(ref IQueryable<T> query, int organizationID)
         {
-            IQueryable<int> ownerUserIds = _queryUser.Where(q => q.OrganizationID == organizationID).Select(o => o.ID);
+            IQueryable<int> ownerUserIds = null;/*_repositoryUser.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);*/
 
             query = query.Where<T, IPersonalityEntity>(q => ownerUserIds.Contains(q.CreatedByUserID));
         }

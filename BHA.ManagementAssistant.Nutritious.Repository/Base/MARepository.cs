@@ -1,33 +1,30 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Model.Entity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BHA.ManagementAssistant.Nutritious.Common;
-using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
-using BHA.ManagementAssistant.Nutritious.Model.Entity;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 {
-    public partial class RepositoryBase<T> : IRepositoryBase<T> where T : class, IEntity
+    public partial class MARepository<T> : IRepository<T> where T : class, IEntity
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IServiceProvider _serviceProvider;
         protected internal ManagementAssistantContext _context { get; set; }
-        private IRepositoryBase<Organization> _repositoryOrganization;
-        private IRepositoryBase<User> _repositoryUser;
         private User _user = new User();
-        private IQueryable<User> _queryUser;
         private DbSet<T> _dbSet;
 
-        public RepositoryBase(ManagementAssistantContext context)
+        public MARepository(ManagementAssistantContext context, IHttpContextAccessor httpContextAccessor, IServiceProvider serviceProvider)
         {
             _context = context;
             _dbSet = _context.Set<T>();
-            _user = _repositoryUser.GetByID(System.Threading.Thread.CurrentPrincipal.Identity.GetUserID());
-            _queryUser = _repositoryUser.ForJoin();
+            _httpContextAccessor = httpContextAccessor;
+            _serviceProvider = serviceProvider;
         }
 
         public bool Create(T entity)
@@ -86,8 +83,17 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         public IQueryable<T> ForJoin(bool? isDeleted = false)
         {
+            IRepository<User> repositoryUser = _serviceProvider.GetService(typeof(IRepository<User>)) as IRepository<User>;
+            var x = repositoryUser.Test();
+            var Z = x.ToList();
+            //IQueryable queryUser = _serviceScope.ServiceProvider.GetService<IRepository<User>>().GetAll();
             IQueryable<T> query = _dbSet.AsNoTracking().AsQueryable();
             return GetQuery(query, true, isDeleted.Value);
+        }
+
+        public IQueryable<T> Test()
+        {
+            return _dbSet.AsQueryable();
         }
     }
 }

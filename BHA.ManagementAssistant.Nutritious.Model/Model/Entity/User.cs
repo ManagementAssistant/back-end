@@ -1,5 +1,6 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
+using System.Collections.Generic;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Entity
 {
@@ -12,5 +13,8 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Entity
         public int HierarchyTypeEnum { get; set; }
 
         public Organization Organization { get; set; }
+
+
+        public ICollection<Company> Company { get; set; }
     }
 }

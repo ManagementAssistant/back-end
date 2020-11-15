@@ -1,18 +1,23 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
-using BHA.ManagementAssistant.Nutritious.Model.Context;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
-using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
+using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using Microsoft.AspNetCore.Http;
 using System;
-using BHA.ManagementAssistant.Nutritious.Repository.Base;
-using BHA.ManagementAssistant.Nutritious.Common.Exceptions;
 
-namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete
+namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : IUserRepository
     {
         private User _user;
-        public UserRepository(ManagementAssistantContext context) : base(context) { }
+        private IRepository<User> _repositoryUser;
+        private IHttpContextAccessor _httpContextAccessor;
+
+        public UserRepository(IRepository<User> repositoryUser, IHttpContextAccessor httpContextAccessor)
+        {
+            this._repositoryUser = repositoryUser;
+            this._httpContextAccessor = httpContextAccessor;
+        }
 
         private User user
         {
@@ -20,11 +25,12 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete
             {
                 if (_user == null)
                 {
-                    _user = this.GetByID(this.GetCurrentUserID());
+                    int currentUserID = _httpContextAccessor.GetCurrentUserID();
+                    _user = _repositoryUser.GetByID(currentUserID);
 
                     if (_user == null)
                     {
-                        throw new TechnicalException("user.id.invalid");
+                        throw new Exception("user.id.invalid");
                     }
                 }
 
@@ -32,14 +38,15 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete
             }
         }
 
-        public int GetCurrentUserID()
+        public User GetCurrentUser()
         {
-            return System.Threading.Thread.CurrentPrincipal.Identity.GetUserID();
+            return user;
         }
 
-        public string GetCurrentUserName()
+        public int GetCurrentUserID()
         {
-            return user.Name;
+            return user.ID;
         }
+
     }
 }

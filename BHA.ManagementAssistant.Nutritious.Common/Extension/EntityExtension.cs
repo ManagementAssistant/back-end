@@ -1,10 +1,7 @@
-﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
-using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using System;
-using System.Collections.Concurrent;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace BHA.ManagementAssistant.Nutritious.Common.Extension
 {
@@ -77,7 +74,7 @@ namespace BHA.ManagementAssistant.Nutritious.Common.Extension
             if (entity is IPersonalityEntity)
             {
                 IPersonalityEntity personalityEntity = entity as IPersonalityEntity;
-                personalityEntity.UpdateDate  = DateTime.Now;
+                personalityEntity.UpdateDate = DateTime.Now;
                 personalityEntity.UpdatedByUserID = userID;
             }
         }

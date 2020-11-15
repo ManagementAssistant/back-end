@@ -15,7 +15,7 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
     public class AuthenticationController : IndependentController
     {
         [HttpPost("new")]
-        public AuthenticationViewModel GetToken([FromBody] AuthenticationFilterModel authenticationFilterModel)
+        public AuthenticationViewModel NewToken([FromBody] AuthenticationFilterModel authenticationFilterModel)
         {
             AuthenticationViewModel authenticationViewModel = new AuthenticationViewModel();
             if (isValidUserAndPassword(authenticationFilterModel))

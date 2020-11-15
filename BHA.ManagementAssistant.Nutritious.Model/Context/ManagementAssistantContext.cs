@@ -1,6 +1,4 @@
-﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
-using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
-using BHA.ManagementAssistant.Nutritious.Model.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +21,11 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
                 .HasOne<Organization>(h => h.Organization)
                 .WithMany(w => w.User)
                 .HasForeignKey(fk => fk.OrganizationID);
+
+            modelBuilder.Entity<Company>()
+                .HasOne<User>(c => c.User)
+                .WithMany(w => w.Company)
+                .HasForeignKey(fk => fk.CreatedByUserID);
 
             base.OnModelCreating(modelBuilder);
         }

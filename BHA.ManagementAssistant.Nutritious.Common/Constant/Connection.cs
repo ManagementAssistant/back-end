@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BHA.ManagementAssistant.Nutritious.Common.Constant
+﻿namespace BHA.ManagementAssistant.Nutritious.Common.Constant
 {
     public static class Connection
     {

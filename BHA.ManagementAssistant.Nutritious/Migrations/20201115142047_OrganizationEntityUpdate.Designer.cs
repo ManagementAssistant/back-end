@@ -4,14 +4,16 @@ using BHA.ManagementAssistant.Nutritious.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
 {
     [DbContext(typeof(ManagementAssistantContext))]
-    partial class ManagementAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20201115142047_OrganizationEntityUpdate")]
+    partial class OrganizationEntityUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

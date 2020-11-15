@@ -1,15 +1,16 @@
-﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
+﻿using BHA.ManagementAssistant.Nutritious.Common;
+using BHA.ManagementAssistant.Nutritious.Common.Constant;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
-using BHA.ManagementAssistant.Nutritious.Model.Repository.Concrete;
-using BHA.ManagementAssistant.Nutritious.Model.Repository.Interface;
-using BHA.ManagementAssistant.Nutritious.Repository.Concrete;
-using BHA.ManagementAssistant.Nutritious.Repository.Interface;
+using BHA.ManagementAssistant.Nutritious.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Service.Concrete;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,17 +59,19 @@ namespace BHA.ManagementAssistant.Nutritious
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtConstants.JweCompactSerializationRegex))
                 };
-
-
             });
-            
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICompanyRepository, CompanyRepository>();
-            services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+            #region GetCurrentUser Getting
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
+            #endregion
 
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddTransient<IRepository<Company>, MARepository<Company>>();
+            services.AddTransient<IRepository<User>, MARepository<User>>();
+            services.AddTransient<IRepository<Organization>, MARepository<Organization>>();
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICompanyService, CompanyService>();            
 
         }
 
@@ -86,7 +89,7 @@ namespace BHA.ManagementAssistant.Nutritious
 
             app.UseAuthorization();
 
-            app.UseCustomMiddleware();
+            //app.UseCustomMiddleware(); //CurrentUser yapısını değiştirdikten sonra custome bir middleware ihtiyacım kalmadı
 
             app.UseEndpoints(endpoints =>
             {
