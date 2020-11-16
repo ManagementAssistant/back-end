@@ -1,7 +1,6 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
-using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using System;
 using System.Linq;
@@ -64,7 +63,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         private void ApplyOrganizationFilters(ref IQueryable<T> query)
         {
-            Organization organization = null;
+            Organization organization = _repositoryOrganization.GetAll().First();
 
             if (typeof(T).Is(EntityType.HierarchyBasedEntity))
             {
@@ -97,7 +96,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         private void ApplyOrganizationBasedEntity(ref IQueryable<T> query, int organizationID)
         {
-            IQueryable<int> ownerUserIds = null;/*_repositoryUser.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);*/
+            IQueryable<int> ownerUserIds = _repositoryUser.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);
 
             query = query.Where<T, IPersonalityEntity>(q => ownerUserIds.Contains(q.CreatedByUserID));
         }

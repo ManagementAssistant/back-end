@@ -1,7 +1,10 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Common;
+using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +18,8 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IRepository<User> _repositoryUser;
+        private readonly IRepository<Organization> _repositoryOrganization;
         protected internal ManagementAssistantContext _context { get; set; }
         private User _user = new User();
         private DbSet<T> _dbSet;
@@ -83,17 +88,8 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         public IQueryable<T> ForJoin(bool? isDeleted = false)
         {
-            IRepository<User> repositoryUser = _serviceProvider.GetService(typeof(IRepository<User>)) as IRepository<User>;
-            var x = repositoryUser.Test();
-            var Z = x.ToList();
-            //IQueryable queryUser = _serviceScope.ServiceProvider.GetService<IRepository<User>>().GetAll();
             IQueryable<T> query = _dbSet.AsNoTracking().AsQueryable();
             return GetQuery(query, true, isDeleted.Value);
-        }
-
-        public IQueryable<T> Test()
-        {
-            return _dbSet.AsQueryable();
         }
     }
 }

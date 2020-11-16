@@ -1,7 +1,7 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+﻿using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Repository.Interface;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using Microsoft.AspNetCore.Http;
 using System;
 

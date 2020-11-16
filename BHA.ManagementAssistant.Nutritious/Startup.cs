@@ -71,7 +71,7 @@ namespace BHA.ManagementAssistant.Nutritious
             services.AddTransient<IRepository<Organization>, MARepository<Organization>>();
 
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ICompanyService, CompanyService>();            
+            services.AddTransient<ICompanyService, CompanyService>();
 
         }
 

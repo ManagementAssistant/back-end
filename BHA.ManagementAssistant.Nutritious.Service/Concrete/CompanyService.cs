@@ -9,17 +9,16 @@ namespace BHA.ManagementAssistant.Nutritious.Service.Concrete
     public class CompanyService : ICompanyService
     {
         private readonly IRepository<Company> _repositoryCompany;
-        //private readonly ICompanyRepository _repositoryCompany;
-        public CompanyService(/*ICompanyRepository repositoryCompany*/IRepository<Company> repositoryCompany)
+
+        public CompanyService(IRepository<Company> repositoryCompany)
         {
             _repositoryCompany = repositoryCompany;
-            //_repositoryCompany = repositoryCompany;
         }
         public ApiResponse<IQueryable<Company>> GetCompanies()
         {
             ApiResponse<IQueryable<Company>> response = new ApiResponse<IQueryable<Company>>();
+            response.Success();
             response.Data = _repositoryCompany.ForJoin();
-            response.isSuccess = true;
 
             return response;
         }
