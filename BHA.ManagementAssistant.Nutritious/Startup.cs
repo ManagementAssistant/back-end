@@ -66,12 +66,12 @@ namespace BHA.ManagementAssistant.Nutritious
             services.AddHttpContextAccessor();
             #endregion
 
-            services.AddTransient<IRepository<Company>, MARepository<Company>>();
-            services.AddTransient<IRepository<User>, MARepository<User>>();
-            services.AddTransient<IRepository<Organization>, MARepository<Organization>>();
+            services.AddScoped<IRepository<Company>, MARepository<Company>>();
+            services.AddScoped<IRepository<User>, MARepository<User>>();
+            services.AddScoped<IRepository<Organization>, MARepository<Organization>>();
 
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ICompanyService, CompanyService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICompanyService, CompanyService>();
 
         }
 
