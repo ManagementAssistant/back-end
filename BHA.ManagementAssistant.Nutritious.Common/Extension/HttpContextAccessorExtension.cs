@@ -1,5 +1,6 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace BHA.ManagementAssistant.Nutritious.Common.Extension
 {
@@ -29,7 +30,13 @@ namespace BHA.ManagementAssistant.Nutritious.Common.Extension
 
         public static string FindFirstValue(this IHttpContextAccessor httpContextAccessor, string claims)
         {
-            return httpContextAccessor.HttpContext.User.FindFirst(claims).Value;
+            string value = "0";
+            Claim claim = httpContextAccessor.HttpContext.User.FindFirst(claims);
+            if (claim != null)
+            {
+                value = claim.Value;
+            }
+            return value;
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using BHA.ManagementAssistant.Nutritious.Common;
-using BHA.ManagementAssistant.Nutritious.Common.Constant;
+﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Repository.Base;
+using BHA.ManagementAssistant.Nutritious.Repository.Concrete;
+using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using BHA.ManagementAssistant.Nutritious.Service.Concrete;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -72,6 +73,9 @@ namespace BHA.ManagementAssistant.Nutritious
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICompanyService, CompanyService>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
         }
 

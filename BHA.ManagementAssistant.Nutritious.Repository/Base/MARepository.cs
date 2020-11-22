@@ -1,10 +1,9 @@
-﻿using BHA.ManagementAssistant.Nutritious.Common;
-using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,20 +15,22 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 {
     public partial class MARepository<T> : IRepository<T> where T : class, IEntity
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IRepository<User> _repositoryUser;
-        private readonly IRepository<Organization> _repositoryOrganization;
+        private readonly IUserRepository _userRepository;
+        private readonly IOrganizationRepository _organizationRepository;
         protected internal ManagementAssistantContext _context { get; set; }
         private User _user = new User();
+        private Organization _organization = new Organization();
         private DbSet<T> _dbSet;
 
-        public MARepository(ManagementAssistantContext context, IHttpContextAccessor httpContextAccessor, IServiceProvider serviceProvider)
+        public MARepository(ManagementAssistantContext context, IUserRepository userRepository, IOrganizationRepository organizationRepository)
         {
             _context = context;
             _dbSet = _context.Set<T>();
-            _httpContextAccessor = httpContextAccessor;
-            _serviceProvider = serviceProvider;
+            _userRepository = userRepository;
+            _organizationRepository = organizationRepository;
+
+            _user = _userRepository.GetCurrentUser();
+            _organization = _organizationRepository.GetCurrentOrganization();
         }
 
         public bool Create(T entity)
@@ -90,6 +91,16 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         {
             IQueryable<T> query = _dbSet.AsNoTracking().AsQueryable();
             return GetQuery(query, true, isDeleted.Value);
+        }
+
+        public int Commit()
+        {
+            return _context.SaveChanges();
+        }
+
+        public Task<int> CommitAsync()
+        {
+            return _context.SaveChangesAsync();
         }
     }
 }

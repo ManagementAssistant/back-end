@@ -1,7 +1,6 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
-using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using System;
 using System.Linq;
 
@@ -40,7 +39,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         {
             if (typeof(T).Is(EntityType.SpecificEntity))
             {
-                return query.Where<T, ISpecificEntity>(q => q.ID == _user.ID);
+                return query.Where<T, ISpecificEntity>(q => q.ID == _organization.ID);
             }
 
             if (typeof(T).Is(EntityType.DeletableEntity))
@@ -63,11 +62,9 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         private void ApplyOrganizationFilters(ref IQueryable<T> query)
         {
-            Organization organization = _repositoryOrganization.GetAll().First();
-
             if (typeof(T).Is(EntityType.HierarchyBasedEntity))
             {
-                if (organization.isHierarchical)
+                if (_organization.isHierarchical)
                 {
                     ApplyFilterHierarchical(ref query);
                 }
@@ -75,7 +72,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
             if (typeof(T).Is(EntityType.OrganizationBasedEntity))
             {
-                ApplyOrganizationBasedEntity(ref query, organization.ID);
+                ApplyOrganizationBasedEntity(ref query, _organization.ID);
             }
         }
 
@@ -96,7 +93,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
         private void ApplyOrganizationBasedEntity(ref IQueryable<T> query, int organizationID)
         {
-            IQueryable<int> ownerUserIds = _repositoryUser.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);
+            IQueryable<int> ownerUserIds = _userRepository.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);
 
             query = query.Where<T, IPersonalityEntity>(q => ownerUserIds.Contains(q.CreatedByUserID));
         }

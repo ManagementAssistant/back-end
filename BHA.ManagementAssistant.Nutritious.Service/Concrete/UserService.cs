@@ -1,26 +1,19 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.BaseResponse;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+using BHA.ManagementAssistant.Nutritious.Core.Service.Concrete;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using System.Linq;
 
 namespace BHA.ManagementAssistant.Nutritious.Service.Concrete
 {
-    public class UserService : IUserService
+    public class UserService : EntityService<User>, IUserService
     {
-        //private readonly IUserRepository _repositoryUser;
-        //public UserService(IUserRepository repositoryUser)
-        //{
-        //    _repositoryUser = repositoryUser;
-        //}
+        public UserService(IRepository<User> repositoryUser): base(repositoryUser)
+        {
 
-        //public ApiResponse<IQueryable<User>> GetUsers()
-        //{
-        //    ApiResponse<IQueryable<User>> response = new ApiResponse<IQueryable<User>>();
-        //    response.Data = _repositoryUser.GetAll();
-        //    response.isSuccess = true;
+        }
 
-        //    return response;
-        //}
         public ApiResponse<IQueryable<User>> GetUsers()
         {
             throw new System.NotImplementedException();

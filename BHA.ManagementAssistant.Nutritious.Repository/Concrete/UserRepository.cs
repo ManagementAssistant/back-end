@@ -4,19 +4,31 @@ using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Linq;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
     public class UserRepository : IUserRepository
-    {
+    {        
         private User _user;
-        private IRepository<User> _repositoryUser;
+        private IQueryable<User> _queryUser;
         private IHttpContextAccessor _httpContextAccessor;
+        private IServiceProvider _serviceProvider;
 
-        public UserRepository(IRepository<User> repositoryUser, IHttpContextAccessor httpContextAccessor)
+        public UserRepository(IServiceProvider serviceProvider, IHttpContextAccessor httpContextAccessor)
         {
-            this._repositoryUser = repositoryUser;
+            this._serviceProvider = serviceProvider;
             this._httpContextAccessor = httpContextAccessor;
+        }
+
+        private IQueryable<User> queryUser
+        {
+            get
+            {
+                _queryUser = _serviceProvider.GetService<IUserRepository>().ForJoin();
+
+                return _queryUser;
+            }
         }
 
         private User user
@@ -26,7 +38,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
                 if (_user == null)
                 {
                     int currentUserID = _httpContextAccessor.GetCurrentUserID();
-                    _user = _repositoryUser.GetByID(currentUserID);
+                    _user = _queryUser.Where(item => item.ID == currentUserID).FirstOrDefault();
 
                     if (_user == null)
                     {
@@ -48,5 +60,9 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
             return user.ID;
         }
 
+        public IQueryable<User> ForJoin()
+        {
+            return queryUser;
+        }
     }
 }
