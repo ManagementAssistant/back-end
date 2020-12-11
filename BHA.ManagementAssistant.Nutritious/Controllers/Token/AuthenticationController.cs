@@ -1,15 +1,16 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
-using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Baseless.AuthenticationOperation;
+using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Linq;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 {
@@ -17,10 +18,11 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
     [ApiController]
     public class AuthenticationController : IndependentController
     {
-        private readonly IRepository<User> _repositoryUser;
-        public AuthenticationController(IRepository<User> repositoryUser)
+        private IServiceProvider _serviceProvider;
+
+        public AuthenticationController(IServiceProvider serviceProvider)
         {
-            _repositoryUser = repositoryUser;
+            _serviceProvider = serviceProvider;
         }
 
         [HttpPost("new")]
@@ -64,7 +66,8 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 
         private User getUser(AuthenticationFilterModel authenticationFilterModel)
         {
-            User user = _repositoryUser.ForJoin().Where(item => item.Name == authenticationFilterModel.UserName && item.Password == authenticationFilterModel.UserPassword).FirstOrDefault();
+            IUserService serviceUser = _serviceProvider.GetService<IUserService>();
+            User user = serviceUser.Repository.ForJoin().Where(item => item.Name == authenticationFilterModel.UserName && item.Password == authenticationFilterModel.UserPassword).FirstOrDefault();
 
             return user;
         }

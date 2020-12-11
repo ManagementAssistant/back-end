@@ -1,10 +1,10 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
-using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using Microsoft.AspNetCore.Http;
 using System;
 using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using System.Linq;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
@@ -21,24 +21,14 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        private IQueryable<Organization> queryOrganization
-        {
-            get
-            {
-                _queryOrganization = _serviceProvider.GetService<IOrganizationRepository>()
-
-                return _queryOrganization;
-            }
-        }
-
         private Organization organization
         {
             get
             {
                 if (_organization == null)
                 {
-                    int currentOrganizationID = _httpContextAccessor.GetCurrentOrganizationID();
-                    _organization = _repositoryOrganization.GetByID(currentOrganizationID);
+                    IRepository<Organization> repositoryOrganization = _serviceProvider.GetService<IRepository<Organization>>();
+                    _organization = repositoryOrganization.GetByID(this.GetCurrentOrganizationID());
 
                     if (_organization == null)
                     {
@@ -57,8 +47,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 
         public int GetCurrentOrganizationID()
         {
-            return organization.ID;
+            return _httpContextAccessor.GetCurrentOrganizationID();
         }
-
     }
 }

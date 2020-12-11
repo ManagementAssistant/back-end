@@ -9,9 +9,10 @@ using System.Linq;
 namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
     public class UserRepository : IUserRepository
-    {        
+    {
         private User _user;
         private IQueryable<User> _queryUser;
+        private IRepository<User> _repositoryUser;
         private IHttpContextAccessor _httpContextAccessor;
         private IServiceProvider _serviceProvider;
 
@@ -21,11 +22,27 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
             this._httpContextAccessor = httpContextAccessor;
         }
 
+        private IRepository<User> repositoryUser
+        {
+            get
+            {
+                if (_repositoryUser == null)
+                {
+                    _repositoryUser = _serviceProvider.GetService<IRepository<User>>();
+                }
+
+                return _repositoryUser;
+            }
+        }
+
         private IQueryable<User> queryUser
         {
             get
             {
-                _queryUser = _serviceProvider.GetService<IUserRepository>().ForJoin();
+                if (_queryUser == null)
+                {
+                    _queryUser = repositoryUser.ForJoin();
+                }
 
                 return _queryUser;
             }
@@ -37,17 +54,21 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
             {
                 if (_user == null)
                 {
-                    int currentUserID = _httpContextAccessor.GetCurrentUserID();
-                    _user = _queryUser.Where(item => item.ID == currentUserID).FirstOrDefault();
+                    _user = repositoryUser.GetByID(this.GetCurrentUserID());
+                }
 
-                    if (_user == null)
-                    {
-                        throw new Exception("user.id.invalid");
-                    }
+                if (_user == null)
+                {
+                    throw new Exception("user.id.invalid");
                 }
 
                 return _user;
             }
+        }
+
+        public IQueryable<User> ForJoin()
+        {
+            return queryUser;
         }
 
         public User GetCurrentUser()
@@ -57,12 +78,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 
         public int GetCurrentUserID()
         {
-            return user.ID;
-        }
-
-        public IQueryable<User> ForJoin()
-        {
-            return queryUser;
+            return _httpContextAccessor.GetCurrentUserID();
         }
     }
 }

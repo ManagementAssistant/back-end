@@ -1,10 +1,9 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
-using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Repository.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,22 +14,22 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 {
     public partial class MARepository<T> : IRepository<T> where T : class, IEntity
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IOrganizationRepository _organizationRepository;
+        private IServiceProvider _serviceProvider;
+        private IUserRepository _repositoryUser;
+        private IOrganizationRepository _repositoryOrganization;
         protected internal ManagementAssistantContext _context { get; set; }
-        private User _user = new User();
-        private Organization _organization = new Organization();
         private DbSet<T> _dbSet;
 
-        public MARepository(ManagementAssistantContext context, IUserRepository userRepository, IOrganizationRepository organizationRepository)
+        public MARepository(ManagementAssistantContext context, IServiceProvider serviceProvider)
         {
             _context = context;
             _dbSet = _context.Set<T>();
-            _userRepository = userRepository;
-            _organizationRepository = organizationRepository;
+            _serviceProvider = serviceProvider;
 
-            _user = _userRepository.GetCurrentUser();
-            _organization = _organizationRepository.GetCurrentOrganization();
+            IUserRepository repositoryUser = _serviceProvider.GetService<IUserRepository>();
+            IOrganizationRepository repositoryOrganization = _serviceProvider.GetService<IOrganizationRepository>();
+            _repositoryUser = repositoryUser;
+            _repositoryOrganization = repositoryOrganization;
         }
 
         public bool Create(T entity)

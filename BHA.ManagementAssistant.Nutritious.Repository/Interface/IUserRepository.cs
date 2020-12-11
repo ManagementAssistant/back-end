@@ -5,8 +5,8 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Interface
 {
     public interface IUserRepository
     {
-        IQueryable<User> ForJoin();
         int GetCurrentUserID();
         User GetCurrentUser();
+        IQueryable<User> ForJoin();
     }
 }

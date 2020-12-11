@@ -1,5 +1,4 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.BaseResponse;
-using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+﻿using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Core.Service.Concrete;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
@@ -14,9 +13,9 @@ namespace BHA.ManagementAssistant.Nutritious.Service.Concrete
 
         }
 
-        public ApiResponse<IQueryable<User>> GetUsers()
+        public IQueryable<User> GetUser()
         {
-            throw new System.NotImplementedException();
+            return this.Repository.GetAll();
         }
     }
 }

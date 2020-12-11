@@ -7,6 +7,6 @@ namespace BHA.ManagementAssistant.Nutritious.Service.Interface
 {
     public interface IUserService: IEntityService<User>
     {
-        ApiResponse<IQueryable<User>> GetUsers();
+        IQueryable<User> GetUser();
     }
 }

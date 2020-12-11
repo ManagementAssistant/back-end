@@ -39,7 +39,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         {
             if (typeof(T).Is(EntityType.SpecificEntity))
             {
-                return query.Where<T, ISpecificEntity>(q => q.ID == _organization.ID);
+                return query.Where<T, ISpecificEntity>(q => q.ID == _repositoryOrganization.GetCurrentOrganizationID());
             }
 
             if (typeof(T).Is(EntityType.DeletableEntity))
@@ -64,7 +64,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         {
             if (typeof(T).Is(EntityType.HierarchyBasedEntity))
             {
-                if (_organization.isHierarchical)
+                if (_repositoryOrganization.GetCurrentOrganization().isHierarchical)
                 {
                     ApplyFilterHierarchical(ref query);
                 }
@@ -72,28 +72,31 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
             if (typeof(T).Is(EntityType.OrganizationBasedEntity))
             {
-                ApplyOrganizationBasedEntity(ref query, _organization.ID);
+                ApplyOrganizationBasedEntity(ref query, _repositoryOrganization.GetCurrentOrganizationID());
             }
         }
 
         private void ApplyDeletedFilters(ref IQueryable<T> query, bool isDeleted)
         {
-            query = query.Where<T, IDeletableEntity>(q => q.isDeleted == isDeleted);
+            if (typeof(T).Is(EntityType.DeletableEntity))
+            {
+                query = query.Where<T, IDeletableEntity>(q => q.isDeleted == isDeleted);
+            }
         }
 
         private void ApplyFilterHierarchical(ref IQueryable<T> query)
         {
-            query = query.Where<T, IHierarchyBasedEntity>(q => q.HierarchyTypeEnum <= _user.HierarchyTypeEnum);
+            query = query.Where<T, IHierarchyBasedEntity>(q => q.HierarchyTypeEnum <= _repositoryUser.GetCurrentUser().HierarchyTypeEnum);
         }
 
         private IQueryable<T> ApplyFilterForUser(IQueryable<T> query)
         {
-            return query.Where<T, IPersonalityEntity>(q => q.CreatedByUserID == _user.ID);
+            return query.Where<T, IPersonalityEntity>(q => q.CreatedByUserID == _repositoryUser.GetCurrentUserID());
         }
 
         private void ApplyOrganizationBasedEntity(ref IQueryable<T> query, int organizationID)
         {
-            IQueryable<int> ownerUserIds = _userRepository.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);
+            IQueryable<int> ownerUserIds = _repositoryUser.ForJoin().Where(q => q.OrganizationID == organizationID).Select(o => o.ID);
 
             query = query.Where<T, IPersonalityEntity>(q => ownerUserIds.Contains(q.CreatedByUserID));
         }
@@ -107,7 +110,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
 
             if (entity is IPersonalityEntity)
             {
-                entity.SetCreatePersonalityEntity(_user.ID);
+                entity.SetCreatePersonalityEntity(_repositoryUser.GetCurrentUserID());
             }
         }
 
@@ -115,7 +118,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         {
             if (entity is IDeletableEntity)
             {
-                entity.SetDeleteDeletableEntity(_user.ID);
+                entity.SetDeleteDeletableEntity(_repositoryUser.GetCurrentUserID());
             }
         }
 
@@ -123,7 +126,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Base
         {
             if (entity is IPersonalityEntity)
             {
-                entity.SetUpdatePersonalityEntity(_user.ID);
+                entity.SetUpdatePersonalityEntity(_repositoryUser.GetCurrentUserID());
             }
         }
 
