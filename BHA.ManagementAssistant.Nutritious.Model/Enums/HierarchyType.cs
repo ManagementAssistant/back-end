@@ -7,6 +7,6 @@
         DM = 200, //Departman Yöneticisi
         Admin = 300, //Departmana ait bilgilerin tümünü görme yetkisine sahip verilen departman iznine göre
         GM = 400, //Firmanın en tepesindeki 
-        Developer = 500
+        BHA = 500
     }
 }
