@@ -42,6 +42,5 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
         {
             return _companyService.Delete(company);
         }
-
     }
 }
