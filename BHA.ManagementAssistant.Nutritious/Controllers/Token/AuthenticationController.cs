@@ -1,6 +1,7 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Model.Enums;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Baseless.AuthenticationOperation;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
@@ -11,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using BHA.ManagementAssistant.Nutritious.Common.Exceptions;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 {
@@ -66,10 +68,24 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 
         private User getUser(AuthenticationFilterModel authenticationFilterModel)
         {
-            IUserService serviceUser = _serviceProvider.GetService<IUserService>();
-            User user = serviceUser.Repository.ForJoin().Where(item => item.Name == authenticationFilterModel.UserName && item.Password == authenticationFilterModel.UserPassword).FirstOrDefault();
 
-            return user;
+            IUserService serviceUser = _serviceProvider.GetService<IUserService>();
+            IQueryable<User> queryUser = serviceUser.Repository.ForJoin();
+
+            LoginType loginType = (LoginType)authenticationFilterModel.LoginType;
+
+            switch (loginType)
+            {
+                case LoginType.UserNameAndPassword:
+                    return getUserWithLoginTypeUserNameAndPassword(authenticationFilterModel, queryUser);
+                default:
+                    throw new TechnicalException("undefined.logintype");
+            }
+        }
+
+        private User getUserWithLoginTypeUserNameAndPassword(AuthenticationFilterModel authenticationFilterModel, IQueryable<User> queryUser)
+        {
+            return queryUser.Where(item => item.Name == authenticationFilterModel.UserName && item.Password == authenticationFilterModel.UserPassword).FirstOrDefault();
         }
     }
 }
