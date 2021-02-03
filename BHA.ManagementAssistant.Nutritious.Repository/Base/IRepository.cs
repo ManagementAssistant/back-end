@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace BHA.ManagementAssistant.Nutritious.Core.Repository.Base
 {
-    public interface IRepository<T> where T : class, IEntity
+    //new() Repositorye interface verilmesini engellemek için kullandım sadece newlenebilen nesnelerin verilebilmesi için
+    public interface IRepository<T> where T : class, IEntity, new()
     {
         T GetByID(int id);
         Task<T> GetByIDAsync(int id);
