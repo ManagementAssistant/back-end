@@ -38,11 +38,6 @@ namespace BHA.ManagementAssistant.Nutritious
 
             services.AddDbContext<ManagementAssistantContext>(options => options.UseSqlServer(Connection.LocalConnectionString, migrations => migrations.MigrationsAssembly(Connection.DefaultMigrationLayer)));
 
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            });
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -85,6 +80,11 @@ namespace BHA.ManagementAssistant.Nutritious
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
             app.UseRouting();
 

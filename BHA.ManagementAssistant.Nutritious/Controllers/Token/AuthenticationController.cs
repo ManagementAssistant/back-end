@@ -28,11 +28,11 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
         }
 
         [HttpPost("new")]
-        public AuthenticationViewModel NewToken([FromBody] AuthenticationFilterModel authenticationFilterModel)
+        public AuthenticationViewModel NewToken([FromBody] AuthenticationModel authenticationModel)
         {
             AuthenticationViewModel authenticationViewModel = new AuthenticationViewModel();
 
-            User user = getUser(authenticationFilterModel);
+            User user = getUser(authenticationModel);
 
             if (user != null)
             {
@@ -66,26 +66,26 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
             };
         }
 
-        private User getUser(AuthenticationFilterModel authenticationFilterModel)
+        private User getUser(AuthenticationModel authenticationModel)
         {
 
             IUserService serviceUser = _serviceProvider.GetService<IUserService>();
             IQueryable<User> queryUser = serviceUser.Repository.ForJoin();
 
-            LoginType loginType = (LoginType)authenticationFilterModel.LoginType;
+            LoginType loginType = (LoginType)authenticationModel.LoginType;
 
             switch (loginType)
             {
                 case LoginType.UserNameAndPassword:
-                    return getUserWithLoginTypeUserNameAndPassword(authenticationFilterModel, queryUser);
+                    return getUserWithLoginTypeUserNameAndPassword(authenticationModel, queryUser);
                 default:
                     throw new TechnicalException("undefined.logintype");
             }
         }
 
-        private User getUserWithLoginTypeUserNameAndPassword(AuthenticationFilterModel authenticationFilterModel, IQueryable<User> queryUser)
+        private User getUserWithLoginTypeUserNameAndPassword(AuthenticationModel authenticationModel, IQueryable<User> queryUser)
         {
-            return queryUser.Where(item => item.Name == authenticationFilterModel.UserName && item.Password == authenticationFilterModel.UserPassword).FirstOrDefault();
+            return queryUser.Where(item => item.Name == authenticationModel.UserName && item.Password == authenticationModel.UserPassword).FirstOrDefault();
         }
     }
 }
