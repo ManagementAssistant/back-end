@@ -11,9 +11,7 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Entity
         public string Password { get; set; }
         public int OrganizationID { get; set; }
         public int HierarchyTypeEnum { get; set; }
-
         public Organization Organization { get; set; }
-
 
         public ICollection<Company> Company { get; set; }
     }

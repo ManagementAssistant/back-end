@@ -14,6 +14,7 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
         public DbSet<User> User { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<Organization> Organization { get; set; }
+        public DbSet<MenuElement> MenuElement { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,11 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
                 .HasOne<User>(c => c.User)
                 .WithMany(w => w.Company)
                 .HasForeignKey(fk => fk.CreatedByUserID);
+
+            modelBuilder.Entity<MenuElement>()
+                .HasOne<MenuElement>(h => h.OwnerMenuElement)
+                .WithMany(w => w.TenantMenuElement)
+                .HasForeignKey(fk => fk.MenuElementID);
 
             base.OnModelCreating(modelBuilder);
         }

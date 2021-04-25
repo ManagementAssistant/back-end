@@ -4,14 +4,16 @@ using BHA.ManagementAssistant.Nutritious.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
 {
     [DbContext(typeof(ManagementAssistantContext))]
-    partial class ManagementAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20210425192547_addMenuElementUpdate")]
+    partial class addMenuElementUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,8 +98,8 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
                     b.Property<int>("MenuElementTypeEnum")
                         .HasColumnType("int");
 
-                    b.Property<int>("MenuTypeEnum")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

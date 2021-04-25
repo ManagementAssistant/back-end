@@ -5,16 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MiddleWare\**" />
+    <EmbeddedResource Remove="MiddleWare\**" />
+    <None Remove="MiddleWare\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BHA.ManagementAssistant.Nutritious.Core\BHA.ManagementAssistant.Nutritious.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="MiddleWare\" />
   </ItemGroup>
 
 </Project>

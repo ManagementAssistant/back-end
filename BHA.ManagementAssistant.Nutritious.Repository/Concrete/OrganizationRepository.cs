@@ -1,14 +1,14 @@
-﻿using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
-using BHA.ManagementAssistant.Nutritious.Common.Extension;
+﻿using BHA.ManagementAssistant.Nutritious.Common.Extension;
+using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
+using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using System;
-using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using System.Linq;
-using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {
-    public class OrganizationRepository: IOrganizationRepository
+    public class OrganizationRepository : IOrganizationRepository
     {
         private Organization _organization;
         private IQueryable<Organization> _queryOrganization;

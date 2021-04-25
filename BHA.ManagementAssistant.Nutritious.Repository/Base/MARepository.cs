@@ -2,7 +2,6 @@
 using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Model.Context;
-using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;

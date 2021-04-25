@@ -1,4 +1,5 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Common.Constant;
+using BHA.ManagementAssistant.Nutritious.Common.Exceptions;
 using BHA.ManagementAssistant.Nutritious.Common.Extension;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Enums;
@@ -12,7 +13,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using BHA.ManagementAssistant.Nutritious.Common.Exceptions;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers.Token
 {

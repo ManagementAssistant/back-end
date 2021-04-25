@@ -8,7 +8,7 @@ namespace BHA.ManagementAssistant.Nutritious.Service.Concrete
 {
     public class UserService : EntityService<User>, IUserService
     {
-        public UserService(IRepository<User> repositoryUser): base(repositoryUser)
+        public UserService(IRepository<User> repositoryUser) : base(repositoryUser)
         {
 
         }

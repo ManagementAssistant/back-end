@@ -4,14 +4,16 @@ using BHA.ManagementAssistant.Nutritious.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
 {
     [DbContext(typeof(ManagementAssistantContext))]
-    partial class ManagementAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20210425191821_addMenuElement")]
+    partial class addMenuElement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,29 +85,6 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
                     b.ToTable("Company");
                 });
 
-            modelBuilder.Entity("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.MenuElement", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("MenuElementID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MenuElementTypeEnum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MenuTypeEnum")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("MenuElementID");
-
-                    b.ToTable("MenuElement");
-                });
-
             modelBuilder.Entity("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.Organization", b =>
                 {
                     b.Property<int>("ID")
@@ -140,13 +119,6 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
                         .HasForeignKey("CreatedByUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.MenuElement", b =>
-                {
-                    b.HasOne("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.MenuElement", "OwnerMenuElement")
-                        .WithMany("TenantMenuElement")
-                        .HasForeignKey("MenuElementID");
                 });
 #pragma warning restore 612, 618
         }
