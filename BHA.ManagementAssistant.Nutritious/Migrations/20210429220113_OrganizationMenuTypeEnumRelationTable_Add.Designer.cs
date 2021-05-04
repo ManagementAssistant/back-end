@@ -4,14 +4,16 @@ using BHA.ManagementAssistant.Nutritious.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
 {
     [DbContext(typeof(ManagementAssistantContext))]
-    partial class ManagementAssistantContextModelSnapshot : ModelSnapshot
+    [Migration("20210429220113_OrganizationMenuTypeEnumRelationTable_Add")]
+    partial class OrganizationMenuTypeEnumRelationTable_Add
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,26 +146,6 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
                     b.ToTable("OrganizationMenuTypeRelation");
                 });
 
-            modelBuilder.Entity("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.UserMenuTypeRelation", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("MenuTypeEnum")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("UserMenuTypeRelation");
-                });
-
             modelBuilder.Entity("BHA.ManagementAssistant.Nutritious.Model.Entity.User", b =>
                 {
                     b.HasOne("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.Organization", "Organization")
@@ -194,15 +176,6 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Migrations
                     b.HasOne("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.Organization", "Organization")
                         .WithMany("OrganizationMenuTypeRelation")
                         .HasForeignKey("OrganizationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BHA.ManagementAssistant.Nutritious.Model.Model.Entity.UserMenuTypeRelation", b =>
-                {
-                    b.HasOne("BHA.ManagementAssistant.Nutritious.Model.Entity.User", "User")
-                        .WithMany("UserMenuTypeRelation")
-                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

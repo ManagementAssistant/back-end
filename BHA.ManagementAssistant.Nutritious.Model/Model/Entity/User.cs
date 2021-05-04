@@ -14,5 +14,6 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Entity
         public Organization Organization { get; set; }
 
         public ICollection<Company> Company { get; set; }
+        public ICollection<UserMenuTypeRelation> UserMenuTypeRelation { get; set; }
     }
 }

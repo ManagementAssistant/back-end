@@ -11,7 +11,7 @@ namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
     public class OrganizationRepository : IOrganizationRepository
     {
         private Organization _organization;
-        private IQueryable<Organization> _queryOrganization;
+        //private IQueryable<Organization> _queryOrganization;
         private IServiceProvider _serviceProvider;
         private IHttpContextAccessor _httpContextAccessor;
 

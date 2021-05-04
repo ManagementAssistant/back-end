@@ -1,5 +1,4 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.BaseResponse;
-using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
+﻿using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
 using BHA.ManagementAssistant.Nutritious.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,7 @@ namespace BHA.ManagementAssistant.Nutritious.WebApi.Controllers
         }
 
         [HttpGet("list")]
-        public ApiResponse<IQueryable<Company>> Get()
+        public IQueryable<Company> Get()
         {
             return _companyService.GetCompanies();
         }

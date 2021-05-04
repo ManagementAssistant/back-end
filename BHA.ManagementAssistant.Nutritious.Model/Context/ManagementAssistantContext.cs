@@ -15,6 +15,8 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
         public DbSet<Company> Company { get; set; }
         public DbSet<Organization> Organization { get; set; }
         public DbSet<MenuElement> MenuElement { get; set; }
+        public DbSet<OrganizationMenuTypeRelation> OrganizationMenuTypeRelation { get; set; }
+        public DbSet<UserMenuTypeRelation> UserMenuTypeRelation { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,7 +26,7 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
                 .HasForeignKey(fk => fk.OrganizationID);
 
             modelBuilder.Entity<Company>()
-                .HasOne<User>(c => c.User)
+                .HasOne<User>(h => h.User)
                 .WithMany(w => w.Company)
                 .HasForeignKey(fk => fk.CreatedByUserID);
 
@@ -32,6 +34,16 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Context
                 .HasOne<MenuElement>(h => h.OwnerMenuElement)
                 .WithMany(w => w.TenantMenuElement)
                 .HasForeignKey(fk => fk.MenuElementID);
+
+            modelBuilder.Entity<OrganizationMenuTypeRelation>()
+                .HasOne<Organization>(h => h.Organization)
+                .WithMany(w => w.OrganizationMenuTypeRelation)
+                .HasForeignKey(fk => fk.OrganizationID);
+
+            modelBuilder.Entity<UserMenuTypeRelation>()
+                .HasOne<User>(h => h.User)
+                .WithMany(w => w.UserMenuTypeRelation)
+                .HasForeignKey(fk => fk.UserID);
 
             base.OnModelCreating(modelBuilder);
         }

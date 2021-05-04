@@ -1,5 +1,4 @@
-﻿using BHA.ManagementAssistant.Nutritious.Core.BaseResponse;
-using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
+﻿using BHA.ManagementAssistant.Nutritious.Core.Repository.Base;
 using BHA.ManagementAssistant.Nutritious.Core.Service.Concrete;
 using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Service.Interface;
@@ -12,13 +11,9 @@ namespace BHA.ManagementAssistant.Nutritious.Service.Concrete
         public CompanyService(IRepository<Company> repositoryCompany) : base(repositoryCompany)
         {
         }
-        public ApiResponse<IQueryable<Company>> GetCompanies()
+        public IQueryable<Company> GetCompanies()
         {
-            ApiResponse<IQueryable<Company>> response = new ApiResponse<IQueryable<Company>>();
-            response.Success();
-            response.Data = this.Repository.ForJoin();
-
-            return response;
+            return this.Repository.ForJoin();
         }
     }
 }

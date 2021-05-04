@@ -11,5 +11,6 @@ namespace BHA.ManagementAssistant.Nutritious.Model.Model.Entity
         public bool isHierarchical { get; set; }
 
         public ICollection<User> User { get; set; }
+        public ICollection<OrganizationMenuTypeRelation> OrganizationMenuTypeRelation { get; set; }
     }
 }
