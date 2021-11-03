@@ -4,7 +4,6 @@ using BHA.ManagementAssistant.Nutritious.Model.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Repository.Interface;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Linq;
 
 namespace BHA.ManagementAssistant.Nutritious.Repository.Concrete
 {

@@ -45,7 +45,7 @@ namespace BHA.ManagementAssistant.Nutritious
             }).AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = true,
                     ValidAudience = JwtConstants.HeaderTypeAlt,

@@ -13,7 +13,7 @@ namespace BHA.ManagementAssistant.Nutritious.Service.Concrete
         }
         public IQueryable<Company> GetCompanies()
         {
-            return this.Repository.ForJoin();
+            return this.Repository.GetAll();
         }
     }
 }

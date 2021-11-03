@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <Compile Remove="Model\ViewModel\**" />
+    <EmbeddedResource Remove="Model\ViewModel\**" />
+    <None Remove="Model\ViewModel\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\ViewModel\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
   </ItemGroup>
 
   <ItemGroup>

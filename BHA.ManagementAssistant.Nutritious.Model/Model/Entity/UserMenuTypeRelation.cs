@@ -1,9 +1,6 @@
 ﻿using BHA.ManagementAssistant.Nutritious.Core.Base.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Entity;
 using BHA.ManagementAssistant.Nutritious.Model.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BHA.ManagementAssistant.Nutritious.Model.Model.Entity
 {
